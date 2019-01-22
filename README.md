@@ -20,6 +20,12 @@ $ sudo chmod +x /usr/local/bin/pivnet
 $ sudo apt update && sudo apt-get -y install jq
 ```
 ## OM
+`terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
+
+```
+$ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
+```
+
 ```
 $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
 ```
