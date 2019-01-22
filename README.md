@@ -24,6 +24,11 @@ $ sudo apt update && sudo apt-get -y install jq
 $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
 ```
 
+## BOSH
+```
+$ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+```
+
 ## terraform.tfvars
 - subscription_id = az account list|jq '.[].id' 
 - tenant_id       = az account list|jq '.[].tenantId'
