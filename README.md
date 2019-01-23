@@ -39,3 +39,7 @@ $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/ro
 - subscription_id = az account list|jq '.[].id' 
 - tenant_id       = az account list|jq '.[].tenantId'
 - client_id       = az ad sp list --display-name "Service Principal for BOSH by syanagihara" | jq '.[].appId'
+
+## PAS
+### CERT DOMAIN
+`*.mypcf.syanagihara.cf,*.sys.mypcf.syanagihara.cf,*.login.sys.mypcf.syanagihara.cf,*.uaa.sys.mypcf.syanagihara.cf,*.apps.mypcf.syanagihara.cf,*.iso.mypcf.syanagihara.cf`
