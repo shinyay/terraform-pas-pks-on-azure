@@ -43,3 +43,13 @@ $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/ro
 ## PAS
 ### CERT DOMAIN
 `*.mypcf.syanagihara.cf,*.sys.mypcf.syanagihara.cf,*.login.sys.mypcf.syanagihara.cf,*.uaa.sys.mypcf.syanagihara.cf,*.apps.mypcf.syanagihara.cf,*.iso.mypcf.syanagihara.cf`
+
+## PIPELINE
+```
+set -x SUBSCRIPTION_ID <SUBSCRIPTION_ID>
+set -x SERVICE_PRINCIPAL_PASSWORD <PASSWORD>
+```
+
+```
+az ad app create --display-name "boshsyanagihara" --homepage "http://BOSHAzureCPI" --identifier-uris "http://BOSHsyanagihara" --password "$SERVICE_PRINCIPAL_PASSWORD" | tee app_create.json
+```
