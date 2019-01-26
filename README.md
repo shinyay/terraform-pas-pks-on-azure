@@ -53,3 +53,13 @@ set -x SERVICE_PRINCIPAL_PASSWORD <PASSWORD>
 ```
 az ad app create --display-name "boshsyanagihara" --homepage "http://BOSHAzureCPI" --identifier-uris "http://BOSHsyanagihara" --password "$SERVICE_PRINCIPAL_PASSWORD" | tee app_create.json
 ```
+
+```
+set -x APP_ID $(jq -r .appId app_create.json)
+
+az ad sp create --id $APP_ID
+
+az role assignment create --assignee "http://BOSHsyanagihara" \
+  --role "Contributor" \
+  --scope /subscriptions/$SUBSCRIPTION_ID
+```
