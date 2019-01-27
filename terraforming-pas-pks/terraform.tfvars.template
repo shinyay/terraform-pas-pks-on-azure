@@ -10,4 +10,4 @@ ops_manager_image_uri = "https://opsmanagersoutheastasia.blob.core.windows.net/i
 dns_suffix            = "YOUR_DOMAIN"
 vm_admin_username     = "admin"
 
-isolation_segment     = "true"
+isolation_segment     = "false"
