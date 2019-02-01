@@ -35,6 +35,48 @@ $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-a
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
 ```
 
+## Azure Configuration
+1. Install Azure CLI
+
+```
+$ brew install azure-cli
+```
+
+2. Set Cloud Name
+
+```
+$ az cloud set --name AzureCloud
+```
+
+- `AzureCloud`
+- `AzureChinaCloud`
+- `AzureUSGovernment`
+- `AzureGermanCloud`
+
+3. Login Azure
+
+```
+$ az login
+```
+
+4. Subscription ID
+
+```
+$ az account list|jq '.[].id'
+```
+
+5. Tenant ID
+
+```
+$ az account list|jq '.[].tenantId'
+```
+
+5. Set Subscription ID
+
+```
+$ az account set --subscription $SUBSCRIPTION
+```
+
 ## terraform.tfvars
 - subscription_id = az account list|jq '.[].id' 
 - tenant_id       = az account list|jq '.[].tenantId'
