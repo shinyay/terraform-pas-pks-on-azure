@@ -6,7 +6,15 @@
 $ az group create --name jumpbox --location japaneast
 ```
 
-### 
+### Create Virtual Machine
+```
+$ az vm create \
+    --resource-group myResourceGroup \
+    --name jumpbox \
+    --image UbuntuLTS \
+    --admin-username admin \
+    --generate-ssh-keys
+```
 
 ## CLI Install
 ```
