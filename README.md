@@ -16,6 +16,15 @@ $ az vm create \
     --generate-ssh-keys
 ```
 
+### SSH to Virtual Machine
+```
+$ az vm list-ip-addresses|jq -r .[0].virtualMachine.network.publicIpAddresses[0].ipAddress
+```
+
+```
+$ ssh azureuser@publicIpAddress
+```
+
 ### [Option] Open port
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
