@@ -1,4 +1,12 @@
 # Tarraform PAS and PKS for Azure
+## Jumpbox VM
+
+### Create Resource Group
+```
+$ az group create --name jumpbox --location japaneast
+```
+
+### 
 
 ## CLI Install
 ```
