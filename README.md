@@ -12,7 +12,7 @@ $ az vm create \
     --resource-group myResourceGroup \
     --name jumpbox \
     --image UbuntuLTS \
-    --admin-username admin \
+    --admin-username azureuser \
     --generate-ssh-keys
 ```
 
