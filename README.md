@@ -16,6 +16,11 @@ $ az vm create \
     --generate-ssh-keys
 ```
 
+### [Option] Open port
+```
+$ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
+```
+
 ## CLI Install
 ```
 $ cd /tmp
