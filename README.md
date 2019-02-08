@@ -55,8 +55,8 @@ $ vim azure-credentials.json
 
 |Input|Command|
 |-----|-------|
-|SUBSCRIPTION-ID|az account list|jq '.[].id'|
-|TENANT-ID|az account list|jq '.[].tenantId'|
+|SUBSCRIPTION-ID|az account list|jq -r '.[0].id'|
+|TENANT-ID|az account list|jq -r '.[0].tenantId'|
 |SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'|
 |SERVICE-PRINCIPAL-PASSWORD|Swordfish|
 
