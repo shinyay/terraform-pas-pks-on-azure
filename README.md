@@ -66,6 +66,13 @@ $ vim azure-credentials.json
 $ sudo snap install terraform
 ```
 
+### [JumpBox] Create Azure Resources with Terraform
+```
+$ terraform init
+$ terraform plan -out=plan
+$ terraform apply plan
+```
+
 ### [Option] Open port
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
