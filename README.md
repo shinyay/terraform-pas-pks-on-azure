@@ -60,6 +60,12 @@ $ vim azure-credentials.json
 |SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'|
 |SERVICE-PRINCIPAL-PASSWORD|Swordfish|
 
+### [JumpBox] Terraform Installation
+
+```
+$ sudo snap install terraform
+```
+
 ### [Option] Open port
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
