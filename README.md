@@ -44,6 +44,22 @@ $ pivnet product-files -p elastic-runtime -r 2.4.2
 $ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
 ```
 
+### [JumpBox] Create Azure Service Principal File
+```
+$ vim azure-credentials.json
+```
+
+```
+{ "subscriptionID": "SUBSCRIPTION-ID", "tenantID": "TENANT-ID", "clientID": "SERVICE-PRINCIPAL-NAME", "clientSecret": "SERVICE-PRINCIPAL-PASSWORD" }
+```
+
+|Input|Command|
+|-----|-------|
+|SUBSCRIPTION-ID|az account list|jq '.[].id'|
+|TENANT-ID|az account list|jq '.[].tenantId'|
+|SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'|
+|SERVICE-PRINCIPAL-PASSWORD|Swordfish|
+
 ### [Option] Open port
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
@@ -129,7 +145,7 @@ $ az account set --subscription $SUBSCRIPTION
 ## terraform.tfvars
 - subscription_id = az account list|jq '.[].id' 
 - tenant_id       = az account list|jq '.[].tenantId'
-- client_id       = az ad sp list --display-name "Service Principal for BOSH by syanagihara" | jq '.[].appId'
+- client_id       = az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'
 
 ## PAS
 ### CERT DOMAIN
