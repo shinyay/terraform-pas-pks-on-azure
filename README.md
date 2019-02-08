@@ -37,6 +37,13 @@ $ sudo apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv \
 $ sudo apt-get update & apt-get install azure-cli
 ```
 
+### [JumpBox] Download PAS
+```
+$ pivnet login --api-token='27f8.........'
+$ pivnet product-files -p elastic-runtime -r 2.4.2
+$ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
+```
+
 ### [Option] Open port
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
