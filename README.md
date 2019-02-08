@@ -95,6 +95,34 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |SSH Private Key|cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_ssh_private_key.value|
 |Azure Environment|Azure Commercial Cloud|
 
+### Director Config
+
+|Input|Value|
+|-----|-----|
+|NTP Servers|ntp.nict.jp|
+|JMX Provider IP Address|---|
+|Bosh HM Forwarder IP Address|---|
+|Enable VM Resurrector Plugin|TRUE|
+|Enable Post Deploy Scripts|TRUE|
+|Recreate all VMs|TRUE|
+|Recreate All Persistent Disks|TRUE|
+|Enable bosh deploy retries|TRUE|
+|Skip Director Drain Lifecycle|TRUE|
+|Allow Legacy Agents|FALSE|
+|Keep Unreachable Director VMs|FALSE|
+|HM Pager Duty Plugin|FALSE|
+|HM Email Plugin|FALSE|
+|CredHub Encryption Provider|Internal|
+|Blobstore Location|Internal|
+|Enable TLS|TRUE|
+|Database Location|Internal|
+|Director Workers|5|
+|Max Threads|---|
+|Director Hostname|---|
+|Custom SSH Banner|---|
+|Identification Tags|---|
+
+
 ## CLI Install
 ```
 $ cd /tmp
