@@ -83,7 +83,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 
 |Input|Value|
 |-----|-----|
-|Subscription ID|cat terraform.tfstate \| jq -r .modules[0].outputs.subscription_id.value"|
+|Subscription ID|cat terraform.tfstate \| jq -r .modules[0].outputs.subscription_id.value|
 |Tenant ID|cat terraform.tfstate \| jq -r .modules[0].outputs.tenant_id.value|
 |Application ID|cat terraform.tfstate \| jq -r .modules[0].outputs.client_id.value|
 |Client Secret|cat terraform.tfstate \| jq -r .modules[0].outputs.client_secret.value|
@@ -129,8 +129,8 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Enable ICMP checks|FALSE|
 |Networks Name|Management|
 |Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
-|Management - CIDR||
-|Management - Reserved IP Ranges||
+|Management - CIDR|cat terraform.tfstate /| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]|
+|Management - Reserved IP Ranges|cat terraform.tfstate /| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]/|sed 's|0/26$|1|g' <br> cat terraform.tfstate /| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]/|sed 's|0/26$|9|g'|
 |Management - DNS|168.63.129.16|
 |Management - Gateway||
 
