@@ -146,6 +146,12 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Services - DNS|168.63.129.16|
 |Services - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_gateway.value|
 
+### Assign Networks
+
+|Input|Value|
+|-----|-----|
+|Network|Management|
+
 ## CLI Install
 ```
 $ cd /tmp
