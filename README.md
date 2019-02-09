@@ -83,7 +83,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 
 |Input|Value|
 |-----|-----|
-|Subscription ID|cat terraform.tfstate | jq -r .modules[0].outputs.subscription_id.value|
+|Subscription ID|`cat terraform.tfstate | jq -r .modules[0].outputs.subscription_id.value`|
 |Tenant ID|cat terraform.tfstate | jq -r .modules[0].outputs.tenant_id.value|
 |Application ID|cat terraform.tfstate | jq -r .modules[0].outputs.client_id.value|
 |Client Secret|cat terraform.tfstate | jq -r .modules[0].outputs.client_secret.value|
