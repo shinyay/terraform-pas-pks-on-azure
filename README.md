@@ -132,7 +132,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Management - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]|
 |Management - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
 |Management - DNS|168.63.129.16|
-|Management - Gateway||
+|Management - Gateway|cat terraform.tfstate | jq -r .modules[0].outputs.management_subnet_gateway.value|
 
 ## CLI Install
 ```
