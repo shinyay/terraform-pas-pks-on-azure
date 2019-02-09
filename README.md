@@ -152,6 +152,15 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |-----|-----|
 |Network|Management|
 
+### Security
+
+|Input|Value|
+|-----|-----|
+|Trusted Certificates|---|
+|Generate VM passwords or use single password for all VMs|Generate passwords|
+
+
+
 ## CLI Install
 ```
 $ cd /tmp
