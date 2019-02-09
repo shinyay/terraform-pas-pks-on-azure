@@ -159,7 +159,13 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Trusted Certificates|---|
 |Generate VM passwords or use single password for all VMs|Generate passwords|
 
+### BOSH DNS Config
 
+|Input|Value|
+|-----|-----|
+|Excluded Recursors|---|
+|Recursor Timeout|---|
+|Handlers|[]|
 
 ## CLI Install
 ```
