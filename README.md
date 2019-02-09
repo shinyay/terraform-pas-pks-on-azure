@@ -84,15 +84,15 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Input|Value|
 |-----|-----|
 |Subscription ID|cat terraform.tfstate \| jq -r .modules[0].outputs.subscription_id.value"|
-|Tenant ID|cat terraform.tfstate | jq -r .modules[0].outputs.tenant_id.value|
-|Application ID|cat terraform.tfstate | jq -r .modules[0].outputs.client_id.value|
-|Client Secret|cat terraform.tfstate | jq -r .modules[0].outputs.client_secret.value|
-|Resource Group Name|cat terraform.tfstate | jq -r .modules[0].outputs.pcf_resource_group_name.value|
-|BOSH Storage Account Name|cat terraform.tfstate | jq -r .modules[0].outputs.bosh_root_storage_account.value|
+|Tenant ID|cat terraform.tfstate \| jq -r .modules[0].outputs.tenant_id.value|
+|Application ID|cat terraform.tfstate \| jq -r .modules[0].outputs.client_id.value|
+|Client Secret|cat terraform.tfstate \| jq -r .modules[0].outputs.client_secret.value|
+|Resource Group Name|cat terraform.tfstate \| jq -r .modules[0].outputs.pcf_resource_group_name.value|
+|BOSH Storage Account Name|cat terraform.tfstate \| jq -r .modules[0].outputs.bosh_root_storage_account.value|
 |Storage Account Type|Premium_LRS|
-|Default Security Group|cat terraform.tfstate | jq -r .modules[0].outputs.bosh_deployed_vms_security_group_name.value|
-|SSH Public Key|cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_ssh_public_key.value|
-|SSH Private Key|cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_ssh_private_key.value|
+|Default Security Group|cat terraform.tfstate \| jq -r .modules[0].outputs.bosh_deployed_vms_security_group_name.value|
+|SSH Public Key|cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_public_key.value|
+|SSH Private Key|cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_private_key.value|
 |Azure Environment|Azure Commercial Cloud|
 
 ### Director Config
@@ -128,7 +128,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |-----|-----|
 |Enable ICMP checks|FALSE|
 |Networks Name|Management|
-|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br> NETWORK-NAME = cat terraform.tfstate | jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate | jq -r .modules[0].outputs.management_subnet_name.value|
+|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
 |Management - CIDR||
 |Management - Reserved IP Ranges||
 |Management - DNS|168.63.129.16|
