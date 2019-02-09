@@ -167,6 +167,13 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Recursor Timeout|---|
 |Handlers|[]|
 
+### Syslog
+
+|Input|Value|
+|-----|-----|
+|Do you want to configure Syslog for Bosh Director?|No|
+
+
 ## CLI Install
 ```
 $ cd /tmp
