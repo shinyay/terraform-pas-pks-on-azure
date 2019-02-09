@@ -173,6 +173,14 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |-----|-----|
 |Do you want to configure Syslog for Bosh Director?|No|
 
+### Resource Config
+
+- DEFALUT
+
+|Input|Value|
+|-----|-----|
+|BOSH Director|Standard_DS2_v2|
+|Master Compilation Job|Standard_F4s|
 
 ## CLI Install
 ```
