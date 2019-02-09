@@ -122,6 +122,12 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Custom SSH Banner|---|
 |Identification Tags|---|
 
+### Create Networks
+
+|Input|Value|
+|-----|-----|
+|Enable ICMP checks|FALSE|
+
 
 ## CLI Install
 ```
