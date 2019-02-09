@@ -127,7 +127,12 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Input|Value|
 |-----|-----|
 |Enable ICMP checks|FALSE|
-
+|Networks Name|Management|
+|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br> NETWORK-NAME = cat terraform.tfstate | jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate | jq -r .modules[0].outputs.management_subnet_name.value|
+|Management - CIDR||
+|Management - Reserved IP Ranges||
+|Management - DNS|168.63.129.16|
+|Management - Gateway||
 
 ## CLI Install
 ```
