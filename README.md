@@ -128,11 +128,17 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |-----|-----|
 |Enable ICMP checks|FALSE|
 |Networks Name|Management|
-|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
+|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
 |Management - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]|
 |Management - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
 |Management - DNS|168.63.129.16|
 |Management - Gateway|cat terraform.tfstate | jq -r .modules[0].outputs.management_subnet_gateway.value|
+|Networks Name|PAS|
+|PAS - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_name.value|
+|PAS - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]|
+|PAS - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
+|PAS - DNS|168.63.129.16|
+|PAS - Gateway|cat terraform.tfstate | jq -r .modules[0].outputs.pas_subnet_gateway.value|
 
 ## CLI Install
 ```
