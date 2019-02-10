@@ -232,6 +232,14 @@ $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-a
 $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
 ```
 
+### [JumpBox] Stage PAS
+
+- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
+
+```
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.4.2
+```
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
