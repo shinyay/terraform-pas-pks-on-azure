@@ -215,8 +215,21 @@ $ sudo apt update && sudo apt-get -y install jq
 ```
 ## OM
 
+### Initial Configuration
+
+- `OPS_MGR_DNS = cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value`
+- `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
+
 ```
 $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
+```
+
+### Upload PAS Install Image
+
+- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-product -p ~/$FILENAME`
+
+```
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p cf-2.4.2-build.33.pivotal
 ```
 
 ## BOSH
