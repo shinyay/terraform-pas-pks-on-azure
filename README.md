@@ -182,6 +182,18 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |BOSH Director|Standard_DS2_v2|
 |Master Compilation Job|Standard_F4s|
 
+## SSH to OpsMan VM from JumpBox
+`terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
+
+```
+$ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_ssh_private_key.value > ops_man.pem
+$ chmod 600 ops_man.pem
+```
+
+```
+$ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
+```
+
 ## CLI Install
 ```
 $ cd /tmp
@@ -202,11 +214,6 @@ $ sudo chmod +x /usr/local/bin/pivnet
 $ sudo apt update && sudo apt-get -y install jq
 ```
 ## OM
-`terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
-
-```
-$ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
-```
 
 ```
 $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
