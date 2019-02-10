@@ -44,6 +44,13 @@ $ pivnet product-files -p elastic-runtime -r 2.4.2
 $ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
 ```
 
+### [JumpBox] Download Stemcell
+```
+$ pivnet releases -p stemcells-ubuntu-xenial
+$ pivnet product-files -p stemcells-ubuntu-xenial -r 170.25
+$ pivnet download-product-files -p stemcells-ubuntu-xenial -r 170.25 -i 303825
+```
+
 ### [JumpBox] Create Azure Service Principal File
 ```
 $ vim azure-credentials.json
