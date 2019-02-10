@@ -239,6 +239,14 @@ $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-a
 $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
 ```
 
+### [JumpBox] Upload Stemcell
+
+- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -p ~/$FILENAME`
+
+```
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/bosh-stemcell-170.25-azure-hyperv-ubuntu-xenial-go_agent.tgz
+```
+
 ### [JumpBox] Stage PAS
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
