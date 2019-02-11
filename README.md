@@ -281,6 +281,39 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |Name|pas-cert|
 |Generate RSA Certificate|MY_DOMAIN = cat terraform.tfstate \| jq -r .modules[2].outputs.dns_zone_name.value<br>\*.$MY_DOMAIN,\*.sys.$MY_DOMAIN,\*.apps.$MY_DOMAIN,login.sys.$MY_DOMAIN,uaa.sys.$MY_DOMAIN,doppler.sys.$MY_DOMAIN,loggregator.sys.$MY_DOMAIN,ssh.sys.$MY_DOMAIN,tcp.$MY_DOMAIN,opsman.$MY_DOMAIN<br>[SAMPLE]<br>\*.mypcf.syanagihara.cf,\*.sys.mypcf.syanagihara.cf,\*.apps.mypcf.syanagihara.cf,login.sys.mypcf.syanagihara.cf,uaa.sys.mypcf.syanagihara.cf,doppler.sys.mypcf.syanagihara.cf,loggregator.sys.mypcf.syanagihara.cf,ssh.sys.mypcf.syanagihara.cf,tcp.mypcf.syanagihara.cf,opsman.mypcf.syanagihara.cf|
 |Certificate Authorities Trusted by Router and HAProxy|---|
+|Minimum version of TLS supported by HAProxy and Router|TLSv1.2|
+|Logging of Client IPs in CF Router|Log client IPs|
+|Configure support for the X-Forwarded-Client-Cert header|TLS terminated for the first time at infrastructure load balancer|
+|HAProxy behavior for Client Certificate Validation|HAProxy does not request client certificates.|
+|Router behavior for Client Certificate Validation|Router requests but does not require client certificates.|
+|HAProxy forwards requests to Router over TLS|Disable|
+|HAProxy support for HSTS|Disable|
+|Disable SSL certificate verification for this environment|TRUE|
+|Disable HTTP on HAProxy and Router|FALSE|
+|Disable insecure cookies on the Router|FALSE|
+|Enable Zipkin tracing headers on the Router|TRUE|
+|Enable Router to write access logs locally|TRUE|
+|Routers reject requests for Isolation Segments|FALSE|
+|Enable support for PROXY protocol in CF Router|FALSE|
+|Choose whether to enable route services.|Enable route services|
+|Max Connections Per Backend|500|
+|Enable Keepalive Connections for Router|Enable|
+|Router Timeout to Backends|900|
+|Frontend Idle Timeout for Router and HAProxy|900|
+|Load Balancer Unhealthy Threshold|20|
+|Load Balancer Healthy Threshold|20|
+|HTTP Headers to Log|---|
+|HAProxy Request Max Buffer Size|16384|
+|HAProxy Protected Domains|---|
+|HAProxy Trusted CIDRs|---|
+|Loggregator Port|---|
+|Container Network Interface Plugin|Silk|
+|DNS Search Domains|---|
+|Database Connection Timeout|120|
+|Enable TCP requests to your apps via specific ports on the TCP Router|Select this option if you prefer to enable TCP Routing at a later time|
+
+
+
 
 
 ## BOSH
