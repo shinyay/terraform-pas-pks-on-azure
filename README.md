@@ -349,6 +349,17 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |Customize Password Label|Password|
 |Proxy IPs Regular Expression|DEFAULT|
 
+### CredHub
+
+|Input|Value|
+|-----|-----|
+|Choose the location of your CredHub database|PAS database|
+|Encryption Keys|Add|
+|Name|pas-encrypt|
+|Key|<20字以上>|
+|Primary|TRUE|
+
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
