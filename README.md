@@ -328,6 +328,27 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 - Default
 
+### UAA
+
+|Input|Value|
+|-----|-----|
+|Choose the location of your UAA database|PAS database (configured on the Databases pane)
+|JWT Issuer URI|---|
+|SAML Service Provider Credentials|Generate RSA Certificate|
+|Generate RSA Certificate|MY_DOMAIN = cat terraform.tfstate \| jq -r .modules[2].outputs.dns_zone_name.value<br>\*.$MY_DOMAIN,\*.sys.$MY_DOMAIN,\*.apps.$MY_DOMAIN,login.sys.$MY_DOMAIN,uaa.sys.$MY_DOMAIN,doppler.sys.$MY_DOMAIN,loggregator.sys.$MY_DOMAIN,ssh.sys.$MY_DOMAIN,tcp.$MY_DOMAIN,opsman.$MY_DOMAIN<br>[SAMPLE]<br>\*.mypcf.syanagihara.cf,\*.sys.mypcf.syanagihara.cf,\*.apps.mypcf.syanagihara.cf,login.sys.mypcf.syanagihara.cf,uaa.sys.mypcf.syanagihara.cf,doppler.sys.mypcf.syanagihara.cf,loggregator.sys.mypcf.syanagihara.cf,ssh.sys.mypcf.syanagihara.cf,tcp.mypcf.syanagihara.cf,opsman.mypcf.syanagihara.cf|
+|SAML Service Provider Key Password|---|
+|SAML Entity ID Override|---|
+|Signature Algorithm|SHA256|
+|Apps Manager Access Token Lifetime|3600|
+|Apps Manager Refresh Token Lifetim|3600|
+|Cloud Foundry CLI Access Token Lifetime|7200|
+|Cloud Foundry CLI Refresh Token Lifetime|1209600|
+|Global Login Session Max Timeout|28800|
+|Global Login Session Idle Timeout|1800|
+|Customize Username Label|Email|
+|Customize Password Label|Password|
+|Proxy IPs Regular Expression|DEFAULT|
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
