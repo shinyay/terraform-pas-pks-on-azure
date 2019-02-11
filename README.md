@@ -262,6 +262,15 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |-----|-----|
 |Network|PAS|
 
+### Domains
+
+|Input|Value|
+|-----|-----|
+|System Domain|cat terraform.tfstate \| jq -r .modules[0].outputs.sys_domain.value|
+|Apps Domain|cat terraform.tfstate \| jq -r .modules[0].outputs.apps_domain.value|
+
+
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
