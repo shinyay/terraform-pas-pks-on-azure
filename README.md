@@ -320,6 +320,11 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 - Default
 
+### Application Security Group
+
+- Type **"X"** to acknowledge that you understand this message 
+
+
 
 ## BOSH
 ```
