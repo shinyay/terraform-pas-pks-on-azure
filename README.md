@@ -324,7 +324,9 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 - Type **"X"** to acknowledge that you understand this message 
 
+### Authentication and Enterprise SSO
 
+- Default
 
 ## BOSH
 ```
