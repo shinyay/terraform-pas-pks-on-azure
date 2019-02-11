@@ -255,6 +255,13 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-ti
 $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.4.2
 ```
 
+## PAS on Azure
+### Assign Networks
+
+|Input|Value|
+|-----|-----|
+|Network|PAS|
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
