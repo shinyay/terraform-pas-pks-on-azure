@@ -371,6 +371,53 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 - Default
 
+### System Logging
+
+- Default
+
+### Custom Branding
+
+- Default
+
+### Apps Manager
+
+- Default
+
+### Email Notifications
+
+- Default
+
+### App Autoscaler
+
+- Default
+
+### Cloud Controller
+
+- Default
+
+### Smoke Tests
+
+- Default
+
+### Advanced Features
+
+- Default
+
+### Metric Registrar
+
+- Default
+
+### Errands
+
+- Default
+
+### Resource Config
+
+|Input|Value|
+|-----|-----|
+|Router - LoadBalancers|cat terraform.tfstate \| jq -r .modules[0].outputs.web_lb_name.value|
+|Diego Brain|cat terraform.tfstate | jq -r .modules[0].outputs.diego_ssh_lb_name.value|
+
 ## BOSH
 ```
 $ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
