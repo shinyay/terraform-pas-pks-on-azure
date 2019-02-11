@@ -363,7 +363,13 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 - Internal Databases - MySQL - Percona XtraDB Cluster
 
+### Internal MySQL
 
+- E-mail address (required) 
+
+### File Storage
+
+- Default
 
 ## BOSH
 ```
