@@ -359,6 +359,11 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |Key|<20字以上>|
 |Primary|TRUE|
 
+### Databases
+
+- Internal Databases - MySQL - Percona XtraDB Cluster
+
+
 
 ## BOSH
 ```
