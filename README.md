@@ -9,11 +9,17 @@ $ az group create --name jumpbox --location japaneast
 ### Create Virtual Machine
 ```
 $ az vm create \
-    --resource-group myResourceGroup \
+    --resource-group jumpbox \
     --name jumpbox \
     --image UbuntuLTS \
     --admin-username azureuser \
     --generate-ssh-keys
+```
+
+### [OPTION] Open Port 80 for Web Traffic
+
+```
+$ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 ```
 
 ### SSH to Virtual Machine
