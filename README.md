@@ -199,7 +199,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 `terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
 
 ```
-$ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_ssh_private_key.value > ops_man.pem
+$ cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_private_key.value > ops_man.pem
 $ chmod 600 ops_man.pem
 ```
 
@@ -230,7 +230,7 @@ $ sudo apt update && sudo apt-get -y install jq
 ## OM
 ### [JumpBox] Initial Configuration
 
-- `OPS_MGR_DNS = cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value`
+- `OPS_MGR_DNS = cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_dns.value`
 - `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
 
 ```
@@ -422,7 +422,7 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |Input|Value|
 |-----|-----|
 |Router - LoadBalancers|cat terraform.tfstate \| jq -r .modules[0].outputs.web_lb_name.value|
-|Diego Brain|cat terraform.tfstate | jq -r .modules[0].outputs.diego_ssh_lb_name.value|
+|Diego Brain|cat terraform.tfstate \| jq -r .modules[0].outputs.diego_ssh_lb_name.value|
 
 ## BOSH
 ```
