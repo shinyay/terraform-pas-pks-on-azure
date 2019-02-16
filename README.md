@@ -471,15 +471,6 @@ $ az account list|jq '.[].tenantId'
 $ az account set --subscription $SUBSCRIPTION
 ```
 
-## terraform.tfvars
-- subscription_id = az account list|jq '.[].id' 
-- tenant_id       = az account list|jq '.[].tenantId'
-- client_id       = az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'
-
-## PAS
-### CERT DOMAIN
-`*.mypcf.syanagihara.cf,*.sys.mypcf.syanagihara.cf,*.login.sys.mypcf.syanagihara.cf,*.uaa.sys.mypcf.syanagihara.cf,*.apps.mypcf.syanagihara.cf,*.iso.mypcf.syanagihara.cf`
-
 ## PIPELINE
 ```
 set -x SUBSCRIPTION_ID <SUBSCRIPTION_ID>
