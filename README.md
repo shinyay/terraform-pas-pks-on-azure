@@ -1,12 +1,16 @@
 # Tarraform PAS and PKS for Azure
+---
+
 ## Jumpbox VM
 
 ### Create Resource Group
+
 ```
 $ az group create --name jumpbox --location japaneast
 ```
 
 ### Create Virtual Machine
+
 ```
 $ az vm create \
     --resource-group jumpbox \
@@ -23,6 +27,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 ```
 
 ### SSH to Virtual Machine
+
 ```
 $ az vm list-ip-addresses|jq -r .[0].virtualMachine.network.publicIpAddresses[0].ipAddress
 ```
@@ -32,6 +37,7 @@ $ ssh azureuser@publicIpAddress
 ```
 
 ### [JumpBox] Install Azure CLI
+
 ```
 $ sudo apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y
 $ AZ_REPO=$(lsb_release -cs)
@@ -44,6 +50,7 @@ $ sudo apt-get update & apt-get install azure-cli
 ```
 
 ### [JumpBox] Download PAS
+
 ```
 $ pivnet login --api-token='27f8.........'
 $ pivnet product-files -p elastic-runtime -r 2.4.2
@@ -51,6 +58,7 @@ $ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
 ```
 
 ### [JumpBox] Download Stemcell
+
 ```
 $ pivnet releases -p stemcells-ubuntu-xenial
 $ pivnet product-files -p stemcells-ubuntu-xenial -r 170.25
@@ -58,6 +66,7 @@ $ pivnet download-product-files -p stemcells-ubuntu-xenial -r 170.25 -i 303825
 ```
 
 ### [JumpBox] Create Azure Service Principal File
+
 ```
 $ vim azure-credentials.json
 ```
@@ -68,9 +77,9 @@ $ vim azure-credentials.json
 
 |Input|Command|
 |-----|-------|
-|SUBSCRIPTION-ID|az account list|jq -r '.[0].id'|
-|TENANT-ID|az account list|jq -r '.[0].tenantId'|
-|SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'|
+|SUBSCRIPTION-ID|az account list \| jq -r '.[0].id'|
+|TENANT-ID|az account list \| jq -r '.[0].tenantId'|
+|SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara \| jq -r '.[0].appId'|
 |SERVICE-PRINCIPAL-PASSWORD|Swordfish|
 
 ### [JumpBox] Terraform Installation
@@ -80,6 +89,7 @@ $ sudo snap install terraform
 ```
 
 ### [JumpBox] Create Azure Resources with Terraform
+
 ```
 $ terraform init
 $ terraform plan -out=plan
@@ -87,6 +97,7 @@ $ terraform apply plan
 ```
 
 ### [Option] Open port
+
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 ```
@@ -196,6 +207,7 @@ $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
 |Master Compilation Job|Standard_F4s|
 
 ## SSH to OpsMan VM from JumpBox
+
 `terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
 
 ```
@@ -208,6 +220,7 @@ $ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
 ```
 
 ## CLI Install
+
 ```
 $ cd /tmp
 
