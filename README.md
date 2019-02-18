@@ -1,4 +1,34 @@
 # Tarraform PAS and PKS for Azure
+
+## Azure CLI
+### Install Azure CLI
+
+```
+$ brew install azure-cli
+```
+
+### Set Cloud Name
+
+```
+$ az cloud set --name AzureCloud
+```
+
+- `AzureCloud`
+- `AzureChinaCloud`
+- `AzureUSGovernment`
+- `AzureGermanCloud`
+
+### Login Azure
+
+```
+$ az login
+```
+### Set Subscription ID
+
+```
+$ az account set --subscription $SUBSCRIPTION
+```
+
 ## Jumpbox VM
 
 ### Create Resource Group
@@ -418,78 +448,9 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |Router - LoadBalancers|cat terraform.tfstate \| jq -r .modules[0].outputs.web_lb_name.value|
 |Diego Brain|cat terraform.tfstate | jq -r .modules[0].outputs.diego_ssh_lb_name.value|
 
-## BOSH
+---
+
+## BOSH Memo
 ```
-$ bosh alias-env azure -e 10.0.8.10 --ca-cert /var/tempest/workspaces/default/root_ca_certificate
-```
-
-## Azure Configuration
-1. Install Azure CLI
-
-```
-$ brew install azure-cli
-```
-
-2. Set Cloud Name
-
-```
-$ az cloud set --name AzureCloud
-```
-
-- `AzureCloud`
-- `AzureChinaCloud`
-- `AzureUSGovernment`
-- `AzureGermanCloud`
-
-3. Login Azure
-
-```
-$ az login
-```
-
-4. Subscription ID
-
-```
-$ az account list|jq '.[].id'
-```
-
-5. Tenant ID
-
-```
-$ az account list|jq '.[].tenantId'
-```
-
-5. Set Subscription ID
-
-```
-$ az account set --subscription $SUBSCRIPTION
-```
-
-## terraform.tfvars
-- subscription_id = az account list|jq '.[].id' 
-- tenant_id       = az account list|jq '.[].tenantId'
-- client_id       = az ad sp list --display-name boshsyanagihara | jq -r '.[0].appId'
-
-## PAS
-### CERT DOMAIN
-`*.mypcf.syanagihara.cf,*.sys.mypcf.syanagihara.cf,*.login.sys.mypcf.syanagihara.cf,*.uaa.sys.mypcf.syanagihara.cf,*.apps.mypcf.syanagihara.cf,*.iso.mypcf.syanagihara.cf`
-
-## PIPELINE
-```
-set -x SUBSCRIPTION_ID <SUBSCRIPTION_ID>
-set -x SERVICE_PRINCIPAL_PASSWORD <PASSWORD>
-```
-
-```
-az ad app create --display-name "boshsyanagihara" --homepage "http://BOSHAzureCPI" --identifier-uris "http://BOSHsyanagihara" --password "$SERVICE_PRINCIPAL_PASSWORD" | tee app_create.json
-```
-
-```
-set -x APP_ID $(jq -r .appId app_create.json)
-
-az ad sp create --id $APP_ID
-
-az role assignment create --assignee "http://BOSHsyanagihara" \
-  --role "Contributor" \
-  --scope /subscriptions/$SUBSCRIPTION_ID
+$ bosh alias-env azure -e $ADDRESS --ca-cert /var/tempest/workspaces/default/root_ca_certificate
 ```
