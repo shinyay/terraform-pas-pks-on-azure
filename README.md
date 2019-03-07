@@ -212,16 +212,22 @@ $ pivnet accept-eula -p azure-service-broker -r 1.11.0
 $ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
 ```
 
+### [JumpBox] Initial Configuration
+
+- `OPS_MGR_DNS = cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_dns.value`
+- `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
+
+```
+$ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
+```
+
 ### [JumpBox] Upload PAS Install Image
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-product -p ~/$FILENAME`
 
-  - `cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value`
-
-
 ```
 ex.
-$ om --target https://localhost -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
 ```
 
 ### [JumpBox] Upload Stemcell Image
@@ -229,7 +235,7 @@ $ om --target https://localhost -k -u admin -p admin --request-timeout 3600 uplo
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -s ~/$STEMCELL`
 
 ```
-$ om --target https://localhost -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/light-bosh-stemcell-170.30-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/light-bosh-stemcell-170.30-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
 ```
 
 ### [JumpBox] Stage PAS
@@ -237,7 +243,7 @@ $ om --target https://localhost -k -u admin -p admin --request-timeout 3600 uplo
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
 
 ```
-$ om --target https://localhost -k -u admin -p admin stage-product -p cf -v 2.4.3
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.4.3
 ```
 
 
@@ -381,12 +387,16 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 
 ### Security
 
+- DEFALUT
+
 |Input|Value|
 |-----|-----|
 |Trusted Certificates|---|
 |Generate VM passwords or use single password for all VMs|Generate passwords|
 
 ### BOSH DNS Config
+
+- DEFALUT
 
 |Input|Value|
 |-----|-----|
@@ -395,6 +405,8 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 |Handlers|[]|
 
 ### Syslog
+
+- DEFALUT
 
 |Input|Value|
 |-----|-----|
