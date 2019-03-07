@@ -139,7 +139,7 @@ $ az login --username $APPLICATION_ID --password $CLIENT_SECRET \
 ```
 $ az provider register --namespace Microsoft.Storage
 $ az provider register --namespace Microsoft.Network
-$ z provider register --namespace Microsoft.Compute
+$ az provider register --namespace Microsoft.Compute
 ```
 
 ### [JumpBox][Option] Install Docker
@@ -181,6 +181,7 @@ $ sudo chmod +x /usr/local/bin/om
 $ sudo chmod +x /usr/local/bin/pivnet
 
 $ sudo apt-get -y install jq
+$ sudo apt-get -y install unzip
 $ sudo apt-get -y install tmux
 ```
 
