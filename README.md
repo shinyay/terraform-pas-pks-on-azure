@@ -45,10 +45,27 @@ $ az ad app create --display-name "$AAD_APP_NAME" \
 --identifier-uris "$UNIQUE_IDENTIFY_URI"
 ```
 
-|Input|Command|
+|ID Name|Command|
 |-----|-------|
 |AAD_APP_NAME|Display Name on the List|
 |UNIQUE_IDENTIFY_URI|Unique URI<br>ex.http://BOSHsyanagihara|
+
+
+### Create Service Principal
+
+```
+$ az ad sp create --id $APPLICATION-ID
+```
+
+```
+az role assignment create --assignee "SERVICE-PRINCIPAL-NAME" \
+--role "Contributor" --scope /subscriptions/SUBSCRIPTION-ID
+```
+
+|ID Name|Command|
+|-----|-------|
+|APPLICATION-ID|az ad app list --display-name boshsyanagihara \| jq -r '.[0].appId'|
+|SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara \| jq -r '.[0].appId'|
 
 ## Jumpbox VM
 
