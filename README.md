@@ -635,6 +635,49 @@ $ git clone https://github.com/Azure/meta-azure-service-broker
 $ cd meta-azure-service-broker
 ```
 
+```
+$ vim manifest.yml
+
+---
+applications:
+- name: meta-azure-service-broker
+  buildpack: nodejs_buildpack
+  instances: 1
+  env:
+    ENVIRONMENT: AzureCloud
+    SUBSCRIPTION_ID: <cat terraform.tfstate | jq -r .modules[0].outputs.subscription_id.value>
+    TENANT_ID: <cat terraform.tfstate | jq -r .modules[0].outputs.tenant_id.value>
+    CLIENT_ID: <cat terraform.tfstate | jq -r .modules[0].outputs.client_id.value>
+    CLIENT_SECRET: <cat terraform.tfstate | jq -r .modules[0].outputs.client_secret.value>
+    SECURITY_USER_NAME: asb-http-auth
+    SECURITY_USER_PASSWORD: VeryStrongHTTPPassword!
+
+    SPACE_SCOPING_ENABLED: false
+
+    AZURE_BROKER_DATABASE_PROVIDER: sqlserver
+    AZURE_BROKER_DATABASE_SERVER: service-broker-db.database.windows.net
+    AZURE_BROKER_DATABASE_USER: admin
+    AZURE_BROKER_DATABASE_PASSWORD: ChangeYourAdminPassword1
+    AZURE_BROKER_DATABASE_NAME: service-broker-db
+    AZURE_BROKER_DATABASE_ENCRYPTION_KEY: bcOdllFpg16kwvMVardg37GEETeeTKw0
+
+    AZURE_SQLDB_ALLOW_TO_CREATE_SQL_SERVER: true
+    AZURE_SQLDB_ENABLE_TRANSPARENT_DATA_ENCRYPTION: false
+    AZURE_SQLDB_SQL_SERVER_POOL: '[
+      {
+        "resourceGroup": "pcf",
+        "location": "japaneast",
+        "sqlServerName": "service-broker-db",
+        "administratorLogin": "admin",
+        "administratorLoginPassword": "ChangeYourAdminPassword1"
+      }
+    ]'
+```
+
+````
+$ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+````
+
 ---
 
 ## BOSH Memo
