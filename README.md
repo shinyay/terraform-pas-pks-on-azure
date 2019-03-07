@@ -783,6 +783,18 @@ azure-storage                standard                                           
 TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
 ```
 
+### Azure Service Broker Tile
+
+#### Azure Config
+
+|Input|Value|
+|-----|-----|
+|Azure Environment|Azure Cloud|
+|Subscription Id|cat terraform.tfstate \| jq -r .modules[0].outputs.subscription_id.value|
+|Tenant Id|cat terraform.tfstate \| jq -r .modules[0].outputs.tenant_id.value|
+|Client Id|cat terraform.tfstate \| jq -r .modules[0].outputs.client_id.value|
+|Client Secret|cat terraform.tfstate \| jq -r .modules[0].outputs.client_secret.value|
+
 ---
 
 ## BOSH Memo
