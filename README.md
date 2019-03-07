@@ -134,6 +134,14 @@ $ az login --username $APPLICATION_ID --password $CLIENT_SECRET \
 |CLIENT_SECRET|Password for AAD<br>ex. Swordfish|
 |TENANT_ID|az account list \| jq -r '.[0].tenantId'|
 
+### [JumpBox] Perform Registrations
+
+```
+$ az provider register --namespace Microsoft.Storage
+$ az provider register --namespace Microsoft.Network
+$ z provider register --namespace Microsoft.Compute
+```
+
 ### [JumpBox][Option] Install Docker
 
 ```
@@ -152,12 +160,38 @@ $ sudo -i
 # exit
 ```
 
+### [JumpBox] Install　CLI
+
+```
+$ cd /tmp
+
+$ sudo apt update
+
+$ wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.4.0/bosh-cli-5.4.0-linux-amd64
+$ sudo mv bosh-cli-* /usr/local/bin/bosh
+
+$ wget https://github.com/pivotal-cf/om/releases/download/0.51.0/om-linux
+$ sudo mv om-linux /usr/local/bin/om
+
+$ wget https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.55/pivnet-linux-amd64-0.0.55
+$ sudo mv pivnet-linux* /usr/local/bin/pivnet
+
+$ sudo chmod +x /usr/local/bin/bosh
+$ sudo chmod +x /usr/local/bin/om
+$ sudo chmod +x /usr/local/bin/pivnet
+
+$ sudo apt-get -y install jq
+$ sudo apt-get -y install tmux
+```
+
 ### [JumpBox] Download PAS
 
 ```
 $ pivnet login --api-token='27f8.........'
 $ pivnet product-files -p elastic-runtime -r 2.4.2
+$ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 277284
 $ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
+
 ```
 
 ### [JumpBox] Download Stemcell
@@ -322,26 +356,7 @@ $ chmod 600 ops_man.pem
 $ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
 ```
 
-## CLI Install
 
-```
-$ cd /tmp
-
-$ wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.4.0/bosh-cli-5.4.0-linux-amd64
-$ sudo mv bosh-cli-* /usr/local/bin/bosh
-
-$ wget https://github.com/pivotal-cf/om/releases/download/0.51.0/om-linux
-$ sudo mv om-linux /usr/local/bin/om
-
-$ wget https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.55/pivnet-linux-amd64-0.0.55
-$ sudo mv pivnet-linux* /usr/local/bin/pivnet
-
-$ sudo chmod +x /usr/local/bin/bosh
-$ sudo chmod +x /usr/local/bin/om
-$ sudo chmod +x /usr/local/bin/pivnet
-
-$ sudo apt update && sudo apt-get -y install jq
-```
 
 ## OM
 ### [JumpBox] Initial Configuration
