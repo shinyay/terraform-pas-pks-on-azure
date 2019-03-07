@@ -647,13 +647,21 @@ $ exec $SHELL -l
 $ node -v
 ```
 
-### CF CLI
+#### CF CLI
 
 ```
 $ wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
 $ echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
 $ sudo apt-get update
 $ sudo apt-get install cf-cli
+```
+
+#### Azure SQL Database
+
+```
+$ az sql server create --name service-broker-db --resource-group pcf --location japaneast  --admin-user admin  --admin-password ChangeYourAdminPassword1
+$ az sql server firewall-rule create --resource-group pcf --server service-broker-db -n AllowAll --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+$ az sql db create --resource-group pcf --server service-broker-db --name azure-service-broker
 ```
 
 ---
