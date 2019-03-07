@@ -85,6 +85,24 @@ $ sudo apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv \
 $ sudo apt-get update & apt-get install azure-cli
 ```
 
+### [JumpBox][Option] Install Docker
+
+```
+$ sudo apt install apt-transport-https ca-certificates curl software-properties-common
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo apt-key fingerprint 0EBFCD88
+$ sudo add-apt-repository \
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+      $(lsb_release -cs) \
+      stable"
+$ sudo apt update
+$ sudo apt install -y docker-ce
+$ sudo -i
+# curl -L https://github.com/docker/compose/releases/download/1.6.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+# chmod +x /usr/local/bin/docker-compose
+# exit
+```
+
 ### [JumpBox] Download PAS
 
 ```
