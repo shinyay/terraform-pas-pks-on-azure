@@ -262,6 +262,12 @@ $ terraform plan -out=plan
 $ terraform apply plan
 ```
 
+### [JumpBox] Create DNS Record
+
+```
+$ cat terraform.tfstate | jq -r .modules[0].outputs.env_dns_zone_name_servers.value
+```
+
 ### [JumpBox][Option] Open port
 
 ```
