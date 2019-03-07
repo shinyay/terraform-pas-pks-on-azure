@@ -48,7 +48,8 @@ $ az ad app create --display-name "$AAD_APP_NAME" \
 |ID Name|Command|
 |-----|-------|
 |AAD_APP_NAME|Display Name on the List|
-|UNIQUE_IDENTIFY_URI|Unique URI<br>ex.http://BOSHsyanagihara|
+|PASSWORD|Password for AAD|
+|UNIQUE_IDENTIFY_URI|Unique URI<br>ex. http://BOSHsyanagihara|
 
 
 ### Create Service Principal
@@ -65,7 +66,7 @@ az role assignment create --assignee "SERVICE-PRINCIPAL-NAME" \
 |ID Name|Command|
 |-----|-------|
 |APPLICATION-ID|az ad app list --display-name boshsyanagihara \| jq -r '.[0].appId'|
-|SERVICE-PRINCIPAL-NAME|az ad sp list --display-name boshsyanagihara \| jq -r '.[0].appId'|
+|SERVICE-PRINCIPAL-NAME|ANY<br>ex. az ad sp list --display-name boshsyanagihara \| jq -r '.[0].appId'|
 
 ## Jumpbox VM
 
@@ -105,15 +106,33 @@ $ ssh azureuser@publicIpAddress
 ### [JumpBox] Install Azure CLI
 
 ```
-$ sudo apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y
-$ AZ_REPO=$(lsb_release -cs)
-$ echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+sudo apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y
+
+AZ_REPO=$(lsb_release -cs)
+echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
     sudo tee /etc/apt/sources.list.d/azure-cli.list
-$ sudo apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv \
+
+sudo apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv \
      --keyserver packages.microsoft.com \
      --recv-keys BC528686B50D79E339D3721CEB3E94ADBE1229CF
-$ sudo apt-get update & apt-get install azure-cli
+
+sudo apt-get update
+
+sudo apt-get install azure-cli
 ```
+
+### [JumpBox] Login Azure
+
+```
+$ az login --username $APPLICATION_ID --password $CLIENT_SECRET \
+    --service-principal --tenant $TENANT_ID 
+```
+
+|ID Name|Command|
+|-----|-------|
+|APPLICATION-ID|az ad app list --display-name boshsyanagihara \| jq -r '.[0].appId'|
+|CLIENT_SECRET|Password for AAD<br>ex. Swordfish|
+|TENANT_ID|az account list \| jq -r '.[0].tenantId'|
 
 ### [JumpBox][Option] Install Docker
 
