@@ -212,7 +212,7 @@ $ pivnet accept-eula -p azure-service-broker -r 1.11.0
 $ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
 ```
 
-## [JumpBox] Upload PAS Install Image
+### [JumpBox] Upload PAS Install Image
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-product -p ~/$FILENAME`
 
@@ -224,7 +224,7 @@ ex.
 $ om --target https://localhost -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
 ```
 
-## [JumpBox] Upload Stemcell Image
+### [JumpBox] Upload Stemcell Image
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -s ~/$STEMCELL`
 
@@ -232,7 +232,7 @@ $ om --target https://localhost -k -u admin -p admin --request-timeout 3600 uplo
 $ om --target https://localhost -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/light-bosh-stemcell-170.30-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
 ```
 
-## [JumpBox] Stage PAS
+### [JumpBox] Stage PAS
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
 
@@ -354,12 +354,12 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 |Input|Value|
 |-----|-----|
 |Enable ICMP checks|FALSE|
-|Networks Name|Management|
-|Management - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
-|Management - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]|
-|Management - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
-|Management - DNS|168.63.129.16|
-|Management - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_gateway.value|
+|Networks Name|infrastructure|
+|infrastructure - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_name.value|
+|infrastructure - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]|
+|infrastructure - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
+|infrastructure - DNS|168.63.129.16|
+|infrastructure - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.infrastructure_subnet_gateway.value|
 |Networks Name|PAS|
 |PAS - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_name.value|
 |PAS - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]|
@@ -377,7 +377,7 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 
 |Input|Value|
 |-----|-----|
-|Network|Management|
+|Network|infrastructure|
 
 ### Security
 
