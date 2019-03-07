@@ -37,6 +37,19 @@ $ az login
 $ az account set --subscription $SUBSCRIPTION
 ```
 
+### Create Azure Active Directory (AAD) application
+
+```
+$ az ad app create --display-name "$AAD_APP_NAME" \
+--password "$PASSWORD" --homepage "http://BOSHAzureCPI" \
+--identifier-uris "$UNIQUE_IDENTIFY_URI"
+```
+
+|Input|Command|
+|-----|-------|
+|AAD_APP_NAME|Display Name on the List|
+|UNIQUE_IDENTIFY_URI|Unique URI<br>ex.http://BOSHsyanagihara|
+
 ## Jumpbox VM
 
 ### Create Resource Group
