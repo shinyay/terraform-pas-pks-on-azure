@@ -235,7 +235,7 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-ti
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -s ~/$STEMCELL`
 
 ```
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/light-bosh-stemcell-170.30-aws-xen-hvm-ubuntu-xenial-go_agent.tgz
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/bosh-stemcell-170.25-azure-hyperv-ubuntu-xenial-go_agent.tgz
 ```
 
 ### [JumpBox] Stage PAS
@@ -632,6 +632,10 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 |-----|-----|
 |Router - LoadBalancers|cat terraform.tfstate \| jq -r .modules[0].outputs.web_lb_name.value|
 |Diego Brain|cat terraform.tfstate \| jq -r .modules[0].outputs.diego_ssh_lb_name.value|
+
+---
+## Azure Service Broker
+
 
 ---
 
