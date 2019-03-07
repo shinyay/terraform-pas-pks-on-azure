@@ -360,12 +360,12 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 |infrastructure - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
 |infrastructure - DNS|168.63.129.16|
 |infrastructure - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.infrastructure_subnet_gateway.value|
-|Networks Name|PAS|
-|PAS - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_name.value|
-|PAS - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]|
-|PAS - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
-|PAS - DNS|168.63.129.16|
-|PAS - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_gateway.value|
+|Networks Name|pas|
+|pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_name.value|
+|pas - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]|
+|pas - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
+|pas - DNS|168.63.129.16|
+|pas - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_gateway.value|
 |Networks Name|Services|
 |Services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_name.value|
 |Services - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]|
@@ -463,7 +463,7 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 |Input|Value|
 |-----|-----|
-|Network|PAS|
+|Network|pas|
 
 ### Domains
 
