@@ -795,6 +795,17 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 |Client Id|cat terraform.tfstate \| jq -r .modules[0].outputs.client_id.value|
 |Client Secret|cat terraform.tfstate \| jq -r .modules[0].outputs.client_secret.value|
 
+#### Broker Config
+
+|Input|Value|
+|-----|-----|
+|Database Provider|SQL Database|
+|Database Server|service-broker-db.database.windows.net|
+|Database Username|admin|
+|Database Password|ChangeYourAdminPassword1|
+|Database Name|azure-service-broker|
+|Database Encryption Key|bcOdllFpg16kwvMVardg37GEETeeTKw0|
+
 ---
 
 ## BOSH Memo
