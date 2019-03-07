@@ -658,7 +658,7 @@ applications:
     AZURE_BROKER_DATABASE_SERVER: service-broker-db.database.windows.net
     AZURE_BROKER_DATABASE_USER: admin
     AZURE_BROKER_DATABASE_PASSWORD: ChangeYourAdminPassword1
-    AZURE_BROKER_DATABASE_NAME: service-broker-db
+    AZURE_BROKER_DATABASE_NAME: azure-service-broker
     AZURE_BROKER_DATABASE_ENCRYPTION_KEY: bcOdllFpg16kwvMVardg37GEETeeTKw0
 
     AZURE_SQLDB_ALLOW_TO_CREATE_SQL_SERVER: true
@@ -679,6 +679,109 @@ applications:
 ````
 $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
 ````
+
+#### Install Node dependencies for production environment
+
+```
+$ export NODE_ENV=production
+$ sudo npm install
+```
+
+##### Work Around for ENOTCACHED error
+
+- Remove `offline=true` in the .npmrc
+
+#### CF PUSH
+
+```
+$ cf login -a api.sys.mypcf.syanagihara.cf --skip-ssl-validation
+$ cf push
+```
+
+```
+    :
+    :
+    :
+   underscore@1.4.4 /tmp/app/node_modules/azure-storage/node_modules/underscore
+   validator@3.22.2 /tmp/app/node_modules/azure-storage/node_modules/validator
+   mocha@3.3.0 /tmp/app/node_modules/mocha
+   commander@2.9.0 /tmp/app/node_modules/mocha/node_modules/commander
+   debug@2.6.0 /tmp/app/node_modules/mocha/node_modules/debug
+   ms@0.7.2 /tmp/app/node_modules/mocha/node_modules/ms
+   diff@3.2.0 /tmp/app/node_modules/mocha/node_modules/diff
+   glob@7.1.1 /tmp/app/node_modules/mocha/node_modules/glob
+   supports-color@3.1.2 /tmp/app/node_modules/mocha/node_modules/supports-color
+   has-flag@1.0.0 /tmp/app/node_modules/mocha/node_modules/has-flag
+          Installing any new modules (package.json + package-lock.json)
+   audited 4920 packages in 5.694s
+   found 373 vulnerabilities (10 low, 298 moderate, 64 high, 1 critical)
+     run `npm audit fix` to fix them, or `npm audit` for details
+   Exit status 0
+   Uploading droplet, build artifacts cache...
+   Uploading droplet...
+   Uploading build artifacts cache...
+   Uploaded build artifacts cache (223B)
+   Uploaded droplet (47.5M)
+   Uploading complete
+   Cell 6867476b-0757-401c-b122-f10790327e89 stopping instance c291e471-b752-4529-a20c-27b787677ebb
+   Cell 6867476b-0757-401c-b122-f10790327e89 destroying container for instance c291e471-b752-4529-a20c-27b787677ebb
+
+Waiting for app to start...
+
+name:              meta-azure-service-broker
+requested state:   started
+routes:            meta-azure-service-broker.apps.mypcf.syanagihara.cf
+last uploaded:     Thu 07 Mar 11:11:41 UTC 2019
+stack:             cflinuxfs3
+buildpacks:        nodejs
+
+type:            web
+instances:       1/1
+memory usage:    1024M
+start command:   npm start
+     state     since                  cpu    memory         disk           details
+#0   running   2019-03-07T11:12:02Z   0.0%   177.9M of 1G   329.6M of 1G
+```
+
+#### Register a service broker
+
+```
+$ cf create-service-broker demo-service-broker asb-http-auth VeryStrongHTTPPassword! http://meta-azure-service-broker.apps.mypcf.syanagihara.cf
+```
+
+#### Enable Azure Services
+
+```
+$ cf enable-service-access azure-cosmosdb
+$ cf enable-service-access azure-eventhubs
+$ cf enable-service-access azure-mysqldb
+$ cf enable-service-access azure-postgresqldb
+$ cf enable-service-access azure-rediscache
+$ cf enable-service-access azure-servicebus
+$ cf enable-service-access azure-sqldb
+$ cf enable-service-access azure-sqldb-failover-group
+$ cf enable-service-access azure-storage
+```
+
+```
+$ cf marketplace
+Getting services from marketplace in org system / space development as admin...
+OK
+
+service                      plans                                                                                                                                                                                                                                     description                                     broker
+app-autoscaler               standard                                                                                                                                                                                                                                  Scales bound applications in response to load   app-autoscaler
+azure-cosmosdb               standard                                                                                                                                                                                                                                  Azure CosmosDb Service                          demo-service-broker
+azure-eventhubs              basic, standard                                                                                                                                                                                                                           Azure Event Hubs Service                        demo-service-broker
+azure-mysqldb                basic1, basic2                                                                                                                                                                                                                            Azure Database for MySQL Service                demo-service-broker
+azure-postgresqldb           basic1, basic2, generalpurpose2, generalpurpose4, generalpurpose8, generalpurpose16, generalpurpose32, generalpurpose64, memoryoptimized2, memoryoptimized4, memoryoptimized8, memoryoptimized16, memoryoptimized32                       Azure Database for PostgreSQL Service           demo-service-broker
+azure-rediscache             basicc0, basicc1, basicc2, basicc3, basicc4, basicc5, basicc6, standardc0, standardc1, standardc2, standardc3, standardc4, standardc5, standardc6, premiump1, premiump2, premiump3, premiump4                                             Azure Redis Cache Service                       demo-service-broker
+azure-servicebus             basic, standard, premium                                                                                                                                                                                                                  Azure Service Bus Service                       demo-service-broker
+azure-sqldb                  basic, StandardS0, StandardS1, StandardS2, StandardS3, StandardS4, StandardS6, StandardS7, StandardS9, StandardS12, PremiumP1, PremiumP2, PremiumP4, PremiumP6, PremiumP11, PremiumP15, DataWarehouse100, DataWarehouse1200, Registered   Azure SQL Database Service                      demo-service-broker
+azure-sqldb-failover-group   SecondaryDatabaseWithFailoverGroup, ExistingDatabaseInFailoverGroup                                                                                                                                                                       Azure SQL Database Failover Group Service       demo-service-broker
+azure-storage                standard                                                                                                                                                                                                                                  Azure Storage Service                           demo-service-broker
+
+TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of a given service.
+```
 
 ---
 
