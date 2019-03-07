@@ -23,6 +23,14 @@ $ az cloud set --name AzureCloud
 ```
 $ az login
 ```
+
+### Azure ID
+
+|ID Name|Command|
+|-----|-------|
+|SUBSCRIPTION-ID|az account list \| jq -r '.[0].id'|
+|TENANT-ID|`az account list \| jq -r '.[0].tenantId'`|
+
 ### Set Subscription ID
 
 ```
