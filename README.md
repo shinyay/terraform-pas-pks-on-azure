@@ -29,7 +29,7 @@ $ az login
 |ID Name|Command|
 |-----|-------|
 |SUBSCRIPTION-ID|az account list \| jq -r '.[0].id'|
-|TENANT-ID|`az account list | jq -r '.[0].tenantId'`|
+|TENANT-ID|az account list \| jq -r '.[0].tenantId'|
 
 ### Set Subscription ID
 
