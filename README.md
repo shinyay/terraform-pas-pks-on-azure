@@ -635,7 +635,26 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-produc
 
 ---
 ## Azure Service Broker
+### Service Broker Database
+#### NodeJS
 
+```
+$ sudo apt install -y nodejs npm
+$ sudo npm install n -g
+$ sudo n stable
+$ sudo apt purge -y nodejs npm
+$ exec $SHELL -l
+$ node -v
+```
+
+### CF CLI
+
+```
+$ wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+$ echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+$ sudo apt-get update
+$ sudo apt-get install cf-cli
+```
 
 ---
 
