@@ -203,6 +203,16 @@ $ pivnet product-files -p stemcells-ubuntu-xenial -r 170.25
 $ pivnet download-product-files -p stemcells-ubuntu-xenial -r 170.25 -i 303825
 ```
 
+### [JumpBox] Download Azure Service Broker
+
+```
+$ pivnet releases -p azure-service-broker
+$ pivnet product-files -p azure-service-broker -r 1.11.0
+$ pivnet accept-eula -p azure-service-broker -r 1.11.0
+$ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
+```
+
+
 ### [JumpBox] Create Azure Service Principal File
 
 ```
@@ -229,12 +239,30 @@ $ sudo snap install terraform
 ### [JumpBox] Create Azure Resources with Terraform
 
 ```
+$ vim terraform.tfvars
+```
+
+```
+subscription_id       = "YOUR-SUBSCRIPTION-ID"
+tenant_id             = "YOUR-TENANT-ID"
+client_id             = "YOUR-SERVICE-PRINCIPAL-ID"
+client_secret         = "YOUR-SERVICE-PRINCIPAL-PASSWORD"
+
+env_name              = "pcf"
+env_short_name        = "az"
+location              = "japaneast"
+ops_manager_image_uri = "https://opsmanagersoutheastasia.blob.core.windows.net/images/ops-manager-2.4-build.131.vhd"
+dns_suffix            = "syanagihara.cf"
+vm_admin_username     = "admin"
+```
+
+```
 $ terraform init
 $ terraform plan -out=plan
 $ terraform apply plan
 ```
 
-### [Option] Open port
+### [JumpBox][Option] Open port
 
 ```
 $ az vm open-port --port 80 --resource-group jumpbox --name jumpbox
