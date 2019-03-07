@@ -421,54 +421,7 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 |BOSH Director|Standard_DS2_v2|
 |Master Compilation Job|Standard_F4s|
 
-## SSH to OpsMan VM from JumpBox
 
-`terraform output` の結果から **ops_manager_ssh_private_key** の内容で `ops_man.pem` を作成
-
-```
-$ cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_private_key.value > ops_man.pem
-$ chmod 600 ops_man.pem
-```
-
-```
-$ ssh -i ./ops_man.pem ubuntu@pcf.mypcf.syanagihara.cf
-```
-
-
-
-## OM
-### [JumpBox] Initial Configuration
-
-- `OPS_MGR_DNS = cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_dns.value`
-- `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
-
-```
-$ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-authentication --username admin --password admin --decryption-passphrase admin
-```
-
-### [JumpBox] Upload PAS Install Image
-
-- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-product -p ~/$FILENAME`
-
-```
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
-```
-
-### [JumpBox] Upload Stemcell
-
-- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -p ~/$FILENAME`
-
-```
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/bosh-stemcell-170.25-azure-hyperv-ubuntu-xenial-go_agent.tgz
-```
-
-### [JumpBox] Stage PAS
-
-- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
-
-```
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.4.2
-```
 
 ## PAS on Azure
 ### Assign Networks
@@ -662,6 +615,24 @@ $ sudo apt-get install cf-cli
 $ az sql server create --name service-broker-db --resource-group pcf --location japaneast  --admin-user admin  --admin-password ChangeYourAdminPassword1
 $ az sql server firewall-rule create --resource-group pcf --server service-broker-db -n AllowAll --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
 $ az sql db create --resource-group pcf --server service-broker-db --name azure-service-broker
+```
+
+```
+$ sudo npm install -g sql-cli
+$ mssql --server "service-broker-db.database.windows.net" --database azure-service-broker --user admin@service-broker-db --pass ChangeYourAdminPassword1 --encrypt
+```
+
+```
+CREATE TABLE instances (azureInstanceId varchar(256) NOT NULL UNIQUE, status varchar(18), timestamp DATETIME DEFAULT (GETDATE()), instanceId char(36) PRIMARY KEY, serviceId char(36) NOT NULL, planId char(36) NOT NULL, organizationGuid char(36) NOT NULL, spaceGuid char(36) NOT NULL, parameters text, lastOperation text, provisioningResult text);
+ALTER TABLE instances ADD state text;
+CREATE TABLE bindings (bindingId char(36) PRIMARY KEY, instanceId char(36) FOREIGN KEY REFERENCES instances(instanceId), timestamp DATETIME DEFAULT (GETDATE()), serviceId char(36) NOT NULL, planId char(36) NOT NULL, parameters text, bindingResult text);
+```
+
+#### Deploy the meta Azure service broker
+
+```
+$ git clone https://github.com/Azure/meta-azure-service-broker
+$ cd meta-azure-service-broker
 ```
 
 ---
