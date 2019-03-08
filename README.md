@@ -680,16 +680,20 @@ applications:
 $ cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
 ````
 
+##### Edit .npmrc for CF Environment
+
+```
+$ vim .npmrc
+```
+
+- Remove `offline=true` in the .npmrc
+
 #### Install Node dependencies for production environment
 
 ```
 $ export NODE_ENV=production
 $ sudo npm install
 ```
-
-##### Work Around for ENOTCACHED error
-
-- Remove `offline=true` in the .npmrc
 
 #### CF PUSH
 
