@@ -612,14 +612,14 @@ $ sudo apt-get install cf-cli
 #### Azure SQL Database
 
 ```
-$ az sql server create --name service-broker-db --resource-group pcf --location japaneast  --admin-user admin  --admin-password ChangeYourAdminPassword1
-$ az sql server firewall-rule create --resource-group pcf --server service-broker-db -n AllowAll --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
-$ az sql db create --resource-group pcf --server service-broker-db --name azure-service-broker
+$ az sql server create --name service-broker-svr --resource-group pcf --location japaneast  --admin-user admin  --admin-password ChangeYourAdminPassword1
+$ az sql server firewall-rule create --resource-group pcf --server service-broker-svr -n AllowAll --start-ip-address 0.0.0.0 --end-ip-address 255.255.255.255
+$ az sql db create --resource-group pcf --server service-broker-svr --name azure-broker-db
 ```
 
 ```
 $ sudo npm install -g sql-cli
-$ mssql --server "service-broker-db.database.windows.net" --database azure-service-broker --user admin@service-broker-db --pass ChangeYourAdminPassword1 --encrypt
+$ mssql --server "service-broker-svr.database.windows.net" --database azure-broker-db --user admin@service-broker-svr --pass ChangeYourAdminPassword1 --encrypt
 ```
 
 ```
@@ -655,10 +655,10 @@ applications:
     SPACE_SCOPING_ENABLED: false
 
     AZURE_BROKER_DATABASE_PROVIDER: sqlserver
-    AZURE_BROKER_DATABASE_SERVER: service-broker-db.database.windows.net
+    AZURE_BROKER_DATABASE_SERVER: service-broker-svr.database.windows.net
     AZURE_BROKER_DATABASE_USER: admin
     AZURE_BROKER_DATABASE_PASSWORD: ChangeYourAdminPassword1
-    AZURE_BROKER_DATABASE_NAME: azure-service-broker
+    AZURE_BROKER_DATABASE_NAME: azure-broker-db
     AZURE_BROKER_DATABASE_ENCRYPTION_KEY: bcOdllFpg16kwvMVardg37GEETeeTKw0
 
     AZURE_SQLDB_ALLOW_TO_CREATE_SQL_SERVER: true
@@ -667,7 +667,7 @@ applications:
       {
         "resourceGroup": "pcf",
         "location": "japaneast",
-        "sqlServerName": "service-broker-db",
+        "sqlServerName": "service-broker-svr",
         "administratorLogin": "admin",
         "administratorLoginPassword": "ChangeYourAdminPassword1"
       }
@@ -804,7 +804,7 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 |Input|Value|
 |-----|-----|
 |Database Provider|SQL Database|
-|Database Server|service-broker-db.database.windows.net|
+|Database Server|service-broker-svr.database.windows.net|
 |Database Username|admin|
 |Database Password|ChangeYourAdminPassword1|
 |Database Name|azure-service-broker|
