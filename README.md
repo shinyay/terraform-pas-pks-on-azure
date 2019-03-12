@@ -807,7 +807,7 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 |Database Server|service-broker-svr.database.windows.net|
 |Database Username|admin|
 |Database Password|ChangeYourAdminPassword1|
-|Database Name|azure-service-broker|
+|Database Name|azure-broker-db|
 |Database Encryption Key|bcOdllFpg16kwvMVardg37GEETeeTKw0|
 
 ---
