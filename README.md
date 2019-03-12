@@ -810,6 +810,16 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 |Database Name|azure-broker-db|
 |Database Encryption Key|bcOdllFpg16kwvMVardg37GEETeeTKw0|
 
+#### SQL Database Config
+
+|Input|Value|
+|-----|-----|
+|Resource Group of the SQL Server|pcf|
+|Location of the SQL Server|japaneast|
+|SQL Server Name|service-broker-svr|
+|SQL Server Administrator Login|admin|
+|SQL Server Administrator Login Password|ChangeYourAdminPassword1|
+
 ---
 
 ## BOSH Memo
