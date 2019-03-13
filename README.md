@@ -820,6 +820,13 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
 |SQL Server Administrator Login|admin|
 |SQL Server Administrator Login Password|ChangeYourAdminPassword1|
 
+#### Apply Changes
+
+- Installation Dashboard
+  - Review Pending Changes
+    - Apply Changes
+
+
 ---
 
 ## BOSH Memo
