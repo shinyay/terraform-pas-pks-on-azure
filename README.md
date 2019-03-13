@@ -849,7 +849,21 @@ azure-storage                standard                                           
 
 ---
 
-## BOSH Memo
+## Memo/Tips
+
+### BOSH CLI
 ```
-$ bosh alias-env azure -e $ADDRESS --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+$ bosh alias-env azure -e $BOSH_DIRECTOR_IP --ca-cert /var/tempest/workspaces/default/root_ca_certificate
+$ bosh -e azure log-in
+  <director/director-credential>
+$ bosh -e azure vms
+$ bosh -e azure -d $DEPLOYMENT ssh $VMNAME/$GUID
+$ bosh -e azure -d $DEPLOYMENT cloud-check
+```
+
+### Kernel Panic
+```
+$ sudo su -
+# sudo sh -c 'echo 1 > /proc/sys/kernel/sysrq'
+# sudo sh -c 'echo c > /proc/sysrq-trigger'
 ```
