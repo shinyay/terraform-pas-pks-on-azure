@@ -826,6 +826,26 @@ TIP: Use 'cf marketplace -s SERVICE' to view descriptions of individual plans of
   - Review Pending Changes
     - Apply Changes
 
+### Using Azure Service Broker
+
+#### List Services
+
+- `cf marketplace`
+
+```
+service                      plans                                                                                                                                                                                                                                     description                                     broker
+app-autoscaler               standard                                                                                                                                                                                                                                  Scales bound applications in response to load   app-autoscaler
+azure-cosmosdb               standard                                                                                                                                                                                                                                  Azure CosmosDb Service                          demo-service-broker
+azure-documentdb             standard                                                                                                                                                                                                                                  Azure DocumentDb Service                        demo-service-broker
+azure-eventhubs              basic, standard                                                                                                                                                                                                                           Azure Event Hubs Service                        demo-service-broker
+azure-mysqldb                basic1, basic2                                                                                                                                                                                                                            Azure Database for MySQL Service                demo-service-broker
+azure-postgresqldb           basic1, basic2, generalpurpose2, generalpurpose4, generalpurpose8, generalpurpose16, generalpurpose32, generalpurpose64, memoryoptimized2, memoryoptimized4, memoryoptimized8, memoryoptimized16, memoryoptimized32                       Azure Database for PostgreSQL Service           demo-service-broker
+azure-rediscache             basicc0, basicc1, basicc2, basicc3, basicc4, basicc5, basicc6, standardc0, standardc1, standardc2, standardc3, standardc4, standardc5, standardc6, premiump1, premiump2, premiump3, premiump4                                             Azure Redis Cache Service                       demo-service-broker
+azure-servicebus             basic, standard, premium                                                                                                                                                                                                                  Azure Service Bus Service                       demo-service-broker
+azure-sqldb                  basic, StandardS0, StandardS1, StandardS2, StandardS3, StandardS4, StandardS6, StandardS7, StandardS9, StandardS12, PremiumP1, PremiumP2, PremiumP4, PremiumP6, PremiumP11, PremiumP15, DataWarehouse100, DataWarehouse1200, Registered   Azure SQL Database Service                      demo-service-broker
+azure-sqldb-failover-group   SecondaryDatabaseWithFailoverGroup, ExistingDatabaseInFailoverGroup                                                                                                                                                                       Azure SQL Database Failover Group Service       demo-service-broker
+azure-storage                standard                                                                                                                                                                                                                                  Azure Storage Service                           demo-service-broker
+```
 
 ---
 
