@@ -167,13 +167,13 @@ $ cd /tmp
 
 $ sudo apt update
 
-$ wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.4.0/bosh-cli-5.4.0-linux-amd64
+$ wget https://github.com/cloudfoundry/bosh-cli/releases/download/v5.5.1/bosh-cli-5.5.1-linux-amd64
 $ sudo mv bosh-cli-* /usr/local/bin/bosh
 
-$ wget https://github.com/pivotal-cf/om/releases/download/0.51.0/om-linux
+$ wget https://github.com/pivotal-cf/om/releases/download/2.0.1/om-linux
 $ sudo mv om-linux /usr/local/bin/om
 
-$ wget https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.55/pivnet-linux-amd64-0.0.55
+$ wget https://github.com/pivotal-cf/pivnet-cli/releases/download/v0.0.60/pivnet-linux-amd64-0.0.60
 $ sudo mv pivnet-linux* /usr/local/bin/pivnet
 
 $ sudo chmod +x /usr/local/bin/bosh
