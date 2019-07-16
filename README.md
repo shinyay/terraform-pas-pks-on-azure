@@ -292,7 +292,7 @@ client_secret         = "YOUR-SERVICE-PRINCIPAL-PASSWORD"
 env_name              = "pcf"
 env_short_name        = "az"
 location              = "japaneast"
-ops_manager_image_uri = "https://opsmanagersoutheastasia.blob.core.windows.net/images/ops-manager-2.4-build.131.vhd"
+ops_manager_image_uri = "https://opsmanagersoutheastasia.blob.core.windows.net/images/ops-manager-2.6.4-build.166.vhd"
 dns_suffix            = "syanagihara.cf"
 vm_admin_username     = "admin"
 ```
@@ -306,7 +306,7 @@ $ terraform apply plan
 ### [JumpBox] Create DNS Record
 
 ```
-$ cat terraform.tfstate | jq -r .modules[0].outputs.env_dns_zone_name_servers.value
+$ terraform output -json | jq -r .env_dns_zone_name_servers.value
 ```
 
 ## BOSH Director for Azure
