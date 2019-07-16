@@ -189,10 +189,17 @@ $ sudo apt-get -y install tmux
 
 ```
 $ pivnet login --api-token='27f8.........'
-$ pivnet product-files -p elastic-runtime -r 2.4.2
-$ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 277284
-$ pivnet download-product-files -p elastic-runtime -r 2.4.2 -i 293808
+$ pivnet product -p elastic-runtime
+$ pivnet product-files -p elastic-runtime -r 2.6.2
 
+351857 | Azure Terraform Templates      | 0.40.0
+428924 | Small Footprint PAS            | 2.6.2-build.2
+428908 | Pivotal Application Service    | 2.6.2-build.2
+```
+
+```
+$ pivnet download-product-files -p elastic-runtime -r 2.6.2 -i 351857
+$ pivnet download-product-files -p elastic-runtime -r 2.6.2 -i 428908
 ```
 
 ### [JumpBox] Download Stemcell
