@@ -331,8 +331,8 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |BOSH Storage Account Name|terraform output -json \| jq -r .bosh_root_storage_account.value|
 |Storage Account Type|Premium_LRS|
 |Default Security Group|terraform output -json \| jq -r .bosh_deployed_vms_security_group_name.value|
-|SSH Public Key|terraform output -json | jq -r .ops_manager_ssh_public_key.value|
-|SSH Private Key|terraform output -json | jq -r .ops_manager_ssh_private_key.value|
+|SSH Public Key|terraform output -json \| jq -r .ops_manager_ssh_public_key.value|
+|SSH Private Key|terraform output -json \| jq -r .ops_manager_ssh_private_key.value|
 |Azure Environment|Azure Commercial Cloud|
 
 ### Director Config
@@ -374,7 +374,7 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |Networks Name|infrastructure|
 |infrastructure - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json\|jq -r .management_subnet_name.value|
 |infrastructure - CIDR|terraform output -json\|jq -r .management_subnet_cidrs.value[0]|
-|infrastructure - Reserved IP Ranges|terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's|0/26$|1|g' <br> terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's|0/26$|9|g'|
+|infrastructure - Reserved IP Ranges|terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's\|0/26$\|1\|g' <br> terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's\|0/26$\|9\|g'|
 |infrastructure - DNS|168.63.129.16|
 |infrastructure - Gateway|terraform output -json\|jq -r .infrastructure_subnet_gateway.value|
 
