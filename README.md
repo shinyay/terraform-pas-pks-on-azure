@@ -384,21 +384,21 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |-----|-----|
 |Networks Name|pas|
 |pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .pas_subnet_name.value|
-|pas - CIDR|terraform output -json|jq -r .pas_subnet_cidrs.value[0]|
+|pas - CIDR|terraform output -json\|jq -r .pas_subnet_cidrs.value[0]|
 |pas - Reserved IP Ranges|terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
 |pas - DNS|168.63.129.16|
 |pas - Gateway|terraform output -json\|jq -r .pas_subnet_gateway.value|
-|Networks Name|services|
 
 #### services
 
 |Input|Value|
 |-----|-----|
-|services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_name.value|
-|services - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]|
-|services - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
+|Networks Name|services|
+|services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .services_subnet_name.value|
+|services - CIDR|terraform output -json\|jq -r .services_subnet_cidrs.value[0]|
+|services - Reserved IP Ranges|terraform output -json\|jq -r .services_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> terraform output -json\|jq -r .services_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
 |services - DNS|168.63.129.16|
-|services - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_gateway.value|
+|services - Gateway|terraform output -json\|jq -r .services_subnet_gateway.value|
 
 ### Assign Networks
 
