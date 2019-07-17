@@ -372,11 +372,11 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |Input|Value|
 |-----|-----|
 |Networks Name|infrastructure|
-|infrastructure - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .management_subnet_name.value|
-|infrastructure - CIDR|terraform output -json|jq -r .management_subnet_cidrs.value[0]|
-|infrastructure - Reserved IP Ranges|terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|1|g' <br> terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|9|g'|
+|infrastructure - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json\|jq -r .management_subnet_name.value|
+|infrastructure - CIDR|terraform output -json\|jq -r .management_subnet_cidrs.value[0]|
+|infrastructure - Reserved IP Ranges|terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's|0/26$|1|g' <br> terraform output -json\|jq -r .management_subnet_cidrs.value[0]\|sed 's|0/26$|9|g'|
 |infrastructure - DNS|168.63.129.16|
-|infrastructure - Gateway|terraform output -json|jq -r .infrastructure_subnet_gateway.value|
+|infrastructure - Gateway|terraform output -json\|jq -r .infrastructure_subnet_gateway.value|
 
 #### pas
 
