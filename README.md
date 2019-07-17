@@ -316,31 +316,30 @@ $ terraform output -json | jq -r .env_dns_zone_name_servers.value
 - https://OPS_MANAGER_DNS
 
 ```
-$ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
+$ terraform output -json | jq -r .ops_manager_dns.value
 ```
 
 ### Azure Config
 
 |Input|Value|
 |-----|-----|
-|Subscription ID|cat terraform.tfstate \| jq -r .modules[0].outputs.subscription_id.value|
-|Tenant ID|cat terraform.tfstate \| jq -r .modules[0].outputs.tenant_id.value|
-|Application ID|cat terraform.tfstate \| jq -r .modules[0].outputs.client_id.value|
-|Client Secret|cat terraform.tfstate \| jq -r .modules[0].outputs.client_secret.value|
-|Resource Group Name|cat terraform.tfstate \| jq -r .modules[0].outputs.pcf_resource_group_name.value|
-|BOSH Storage Account Name|cat terraform.tfstate \| jq -r .modules[0].outputs.bosh_root_storage_account.value|
+|Subscription ID|terraform output -json \| jq -r .subscription_id.value|
+|Tenant ID|terraform output -json \| jq -r .tenant_id.value|
+|Application ID|terraform output -json \| jq -r .client_id.value|
+|Client Secret|terraform output -json \| jq -r .client_secret.value|
+|Resource Group Name|terraform output -json \| jq -r .pcf_resource_group_name.value|
+|BOSH Storage Account Name|terraform output -json \| jq -r .bosh_root_storage_account.value|
 |Storage Account Type|Premium_LRS|
-|Default Security Group|cat terraform.tfstate \| jq -r .modules[0].outputs.bosh_deployed_vms_security_group_name.value|
-|SSH Public Key|cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_public_key.value|
-|SSH Private Key|cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_ssh_private_key.value|
+|Default Security Group|terraform output -json \| jq -r .bosh_deployed_vms_security_group_name.value|
+|SSH Public Key|terraform output -json | jq -r .ops_manager_ssh_public_key.value|
+|SSH Private Key|terraform output -json | jq -r .ops_manager_ssh_private_key.value|
 |Azure Environment|Azure Commercial Cloud|
 
 ### Director Config
 
 |Input|Value|
 |-----|-----|
-|NTP Servers|ntp.nict.jp|
-|JMX Provider IP Address|---|
+|NTP Servers|0.jp.pool.ntp.org,1.jp.pool.ntp.org,2.jp.pool.ntp.org,3.jp.pool.ntp.org|
 |Bosh HM Forwarder IP Address|---|
 |Enable VM Resurrector Plugin|TRUE|
 |Enable Post Deploy Scripts|TRUE|
@@ -348,7 +347,7 @@ $ cat terraform.tfstate | jq -r .modules[0].outputs.ops_manager_dns.value
 |Recreate All Persistent Disks|TRUE|
 |Enable bosh deploy retries|TRUE|
 |Skip Director Drain Lifecycle|TRUE|
-|Allow Legacy Agents|FALSE|
+|Store BOSH Job Credentials on tmpfs (beta)|TRUE|
 |Keep Unreachable Director VMs|FALSE|
 |HM Pager Duty Plugin|FALSE|
 |HM Email Plugin|FALSE|
