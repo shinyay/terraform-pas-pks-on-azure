@@ -394,7 +394,7 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |Input|Value|
 |-----|-----|
 |Networks Name|services|
-|services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .services_subnet_name.value|
+|services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json\|jq -r .services_subnet_name.value|
 |services - CIDR|terraform output -json\|jq -r .services_subnet_cidrs.value[0]|
 |services - Reserved IP Ranges|terraform output -json\|jq -r .services_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> terraform output -json\|jq -r .services_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
 |services - DNS|168.63.129.16|
