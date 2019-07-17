@@ -366,19 +366,34 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |Input|Value|
 |-----|-----|
 |Enable ICMP checks|FALSE|
+
+#### infrastructure
+
+|Input|Value|
+|-----|-----|
 |Networks Name|infrastructure|
 |infrastructure - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .management_subnet_name.value|
 |infrastructure - CIDR|terraform output -json|jq -r .management_subnet_cidrs.value[0]|
-|infrastructure - Reserved IP Ranges|terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|1|g' <br> terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|9|g' <br> `10.0.8.1-10.0.8.9`|
+|infrastructure - Reserved IP Ranges|terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|1|g' <br> terraform output -json|jq -r .management_subnet_cidrs.value[0]|sed 's|0/26$|9|g'|
 |infrastructure - DNS|168.63.129.16|
-|infrastructure - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.infrastructure_subnet_gateway.value|
+|infrastructure - Gateway|terraform output -json|jq -r .infrastructure_subnet_gateway.value|
+
+#### pas
+
+|Input|Value|
+|-----|-----|
 |Networks Name|pas|
-|pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_name.value|
-|pas - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]|
-|pas - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
+|pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .pas_subnet_name.value|
+|pas - CIDR|terraform output -json|jq -r .pas_subnet_cidrs.value[0]|
+|pas - Reserved IP Ranges|terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
 |pas - DNS|168.63.129.16|
-|pas - Gateway|cat terraform.tfstate \| jq -r .modules[0].outputs.pas_subnet_gateway.value|
+|pas - Gateway|terraform output -json\|jq -r .pas_subnet_gateway.value|
 |Networks Name|services|
+
+#### services
+
+|Input|Value|
+|-----|-----|
 |services - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.network_name.value <br> SUBNET-NAME = cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_name.value|
 |services - CIDR|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]|
 |services - Reserved IP Ranges|cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> cat terraform.tfstate \| jq -r .modules[0].outputs.services_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
