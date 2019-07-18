@@ -202,14 +202,6 @@ $ pivnet download-product-files -p elastic-runtime -r 2.6.2 -i 351857
 $ pivnet download-product-files -p elastic-runtime -r 2.6.2 -i 428908
 ```
 
-### [JumpBox] Download Stemcell
-
-```
-$ pivnet releases -p stemcells-ubuntu-xenial
-$ pivnet product-files -p stemcells-ubuntu-xenial -r 170.25
-$ pivnet download-product-files -p stemcells-ubuntu-xenial -r 170.25 -i 303825
-```
-
 ### [JumpBox] Download Azure Service Broker
 
 ```
@@ -236,6 +228,22 @@ $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-a
 $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.6.2-build.2.pivotal
 ```
 
+### [JumpBox] Stage PAS
+
+- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
+
+```
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.6.2
+```
+
+### [JumpBox] Download Stemcell
+
+```
+$ pivnet releases -p stemcells-ubuntu-xenial
+$ pivnet product-files -p stemcells-ubuntu-xenial -r 170.25
+$ pivnet download-product-files -p stemcells-ubuntu-xenial -r 170.25 -i 303825
+```
+
 ### [JumpBox] Upload Stemcell Image
 
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-stemcell -s ~/$STEMCELL`
@@ -243,15 +251,6 @@ $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-ti
 ```
 $ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-stemcell -s ~/bosh-stemcell-170.25-azure-hyperv-ubuntu-xenial-go_agent.tgz
 ```
-
-### [JumpBox] Stage PAS
-
-- `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD stage-product -p $PRODUCT_NAME -v $PRODUCT_VERSION`
-
-```
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin stage-product -p cf -v 2.4.3
-```
-
 
 ### [JumpBox] Create Azure Service Principal File
 
