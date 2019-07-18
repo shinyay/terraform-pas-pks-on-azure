@@ -453,8 +453,8 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 
 |Input|Value|
 |-----|-----|
-|System Domain|cat terraform.tfstate \| jq -r .modules[0].outputs.sys_domain.value|
-|Apps Domain|cat terraform.tfstate \| jq -r .modules[0].outputs.apps_domain.value|
+|System Domain|terraform output -json\|jq -r .sys_domain.value|
+|Apps Domain|terraform output -json\|jq -r .apps_domain.value|
 
 ### Networking
 
@@ -602,8 +602,8 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 
 |Input|Value|
 |-----|-----|
-|Router - LoadBalancers|cat terraform.tfstate \| jq -r .modules[0].outputs.web_lb_name.value|
-|Diego Brain|cat terraform.tfstate \| jq -r .modules[0].outputs.diego_ssh_lb_name.value|
+|Router - LoadBalancers|terraform output -json\| jq -r .web_lb_name.value|
+|Diego Brain|terraform output -json\| jq -r .diego_ssh_lb_name.value|
 
 ---
 ## Azure Service Broker
