@@ -221,7 +221,7 @@ $ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
 
 ### [JumpBox] Initial Configuration
 
-- `OPS_MGR_DNS = cat terraform.tfstate \| jq -r .modules[0].outputs.ops_manager_dns.value`
+- `OPS_MGR_DNS = terraform output -json\| jq -r .ops_manager_dns.value`
 - `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
 
 ```
@@ -233,8 +233,7 @@ $ om --target https://pcf.mypcf.syanagihara.cf --skip-ssl-validation configure-a
 - `om --target https://$OPS_MGR_DNS -k -u $OPS_MGR_USR -p $OPS_MGR_PWD --request-timeout 3600 upload-product -p ~/$FILENAME`
 
 ```
-ex.
-$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.4.2-build.33.pivotal
+$ om --target https://pcf.mypcf.syanagihara.cf -k -u admin -p admin --request-timeout 3600 upload-product -p ~/cf-2.6.2-build.2.pivotal
 ```
 
 ### [JumpBox] Upload Stemcell Image
