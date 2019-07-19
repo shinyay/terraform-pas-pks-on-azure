@@ -897,11 +897,54 @@ $ sudo su -
 # sudo sh -c 'echo c > /proc/sysrq-trigger'
 ```
 
-### UAA
+### UAA for usage_service.audit
+
+- UAA Target
 
 ```
 $ uaac target uaa.sys.pcf.syanagihara.cf --skip-ssl-validation
 Unknown key: Max-Age = 86400
 
 Target: https://uaa.sys.pcf.syanagihara.cf
+```
+
+- UAA Credential
+  - PAS -> Credentials -> UAA -> Admin Client Credentials
+
+
+```
+$ uaac token client get admin -s ADMIN-CLIENT-CREDENTIAL
+```
+
+- User Add
+
+```
+$ uaac user add syanagihara -p PASSWORD --emails syanagihara@example.com
+user account successfully added
+```
+
+```
+$ uaac member add usage_service.audit syanagihara
+```
+
+- [Reference](https://docs.pivotal.io/pivotalcf/2-6/opsguide/accounting-report.html)
+
+```
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/app_usages" -k -v -H "authorization: `cf oauth-token`"
+
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/task_usages" -k -v -H "authorization: `cf oauth-token`"
+
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/system_report/service_usages" -k -v -H "authorization: `cf oauth-token`"
+
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/`cf org YOUR-ORG --guid`/app_usages?start=YYYY-MM-DD&end=YYYY-MM-DD" -k -v -H "authorization: `cf oauth-token`"
+
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/`cf org YOUR-ORG --guid`/task_usages?start=YYYY-MM-DD&end=YYYY-MM-DD" -k -v -H "authorization: `cf oauth-token`"
+
+$ curl "https://app-usage.YOUR-SYSTEM-DOMAIN/organizations/`cf org YOUR-ORG --guid`/service_usages?start=YYYY-MM-DD&end=YYYY-MM-DD" -k -v -H "authorization: `cf oauth-token`"
+```
+
+- Usage Service Client Credentials
+  - PAS -> Credentials -> UAA -> AUsage Service Client Credentials
+```
+./telemetry-collector collect --url https://pcf.pcf.syanagihara.cf --username admin --password admin --env-type development --cf-api-url https://api.sys.pcf.syanagihara.cf --usage-service-url https://app-usage.sys.pcf.syanagihara.cf --usage-service-client-id usage_service --usage-service-client-secret USAGE-SERVICE-CLIENT-SECRET --output-dir output --insecure-skip-tls-verify --usage-service-insecure-skip-tls-verify
 ```
