@@ -870,6 +870,16 @@ azure-storage                standard                                           
 
 ## Memo/Tips
 
+### Ops Manager VM Login
+
+- Check OpsManager FQDN by Azure Porta
+- Create Private Key for OpsManager VM
+  - `$ terraform output -json | jq -r .ops_manager_ssh_private_key.value`
+- Change the permissions for your SSH private key
+  - `$ chmod 600 PRIVATE-KEY`
+- SSH into the Ops Manager VM
+  - `$ ssh -i PRIVATE-KEY ubuntu@OPS-MANAGER-FQDN`
+
 ### BOSH CLI
 ```
 $ bosh alias-env azure -e $BOSH_DIRECTOR_IP --ca-cert /var/tempest/workspaces/default/root_ca_certificate
@@ -885,4 +895,13 @@ $ bosh -e azure -d $DEPLOYMENT cloud-check
 $ sudo su -
 # sudo sh -c 'echo 1 > /proc/sys/kernel/sysrq'
 # sudo sh -c 'echo c > /proc/sysrq-trigger'
+```
+
+### UAA
+
+```
+$ uaac target uaa.sys.pcf.syanagihara.cf --skip-ssl-validation
+Unknown key: Max-Age = 86400
+
+Target: https://uaa.sys.pcf.syanagihara.cf
 ```
