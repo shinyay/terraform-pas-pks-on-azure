@@ -213,7 +213,7 @@ $ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
 
 ### [JumpBox] Initial Configuration
 
-- `OPS_MGR_DNS = terraform output -json\| jq -r .ops_manager_dns.value`
+- `OPS_MGR_DNS = terraform output -json| jq -r .ops_manager_dns.value`
 - `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
 
 ```
