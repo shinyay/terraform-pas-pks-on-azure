@@ -381,7 +381,7 @@ $ terraform output -json | jq -r .ops_manager_dns.value
 |Input|Value|
 |-----|-----|
 |Networks Name|pas|
-|pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json|jq -r .pas_subnet_name.value|
+|pas - Azure Network Name|NETWORK-NAME/SUBNET-NAME <br><br> NETWORK-NAME = terraform output -json\|jq -r .network_name.value <br> SUBNET-NAME = terraform output -json\|jq -r .pas_subnet_name.value|
 |pas - CIDR|terraform output -json\|jq -r .pas_subnet_cidrs.value[0]|
 |pas - Reserved IP Ranges|terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|1\|g' <br> terraform output -json\|jq -r .pas_subnet_cidrs.value[0]\|sed 's\|0/22$\|9\|g'|
 |pas - DNS|168.63.129.16|
