@@ -213,7 +213,7 @@ $ pivnet download-product-files -p azure-service-broker -r 1.11.0 -i 294549
 
 ### [JumpBox] Initial Configuration
 
-- `OPS_MGR_DNS = terraform output -json| jq -r .ops_manager_dns.value`
+- `export OPS_MGR_DNS=`terraform output -json| jq -r .ops_manager_dns.value``
 - `om --target https://$OPS_MGR_DNS --skip-ssl-validation configure-authentication --username $OPS_MGR_USR --password $OPS_MGR_PWD --decryption-passphrase $OPS_MGR_PWD`
 
 ```
@@ -872,6 +872,13 @@ azure-storage                standard                                           
 
 ### Ops Manager VM Login
 
+```
+$ az vm list-ip-addresses --resource-group pcf -n pcf-ops-manager-vm| jq -r .[].virtualMachine.network.publicIpAddresses[].ipAddress
+$ terraform output -json | jq -r .ops_manager_ssh_private_key.value > pcf.key
+$ chmod 600 pcf.key
+$ ssh -i pcf.key ubuntu@OPS-MANAGER-PUBLIC-IP
+```
+
 - Check OpsManager FQDN by Azure Porta
 - Create Private Key for OpsManager VM
   - `$ terraform output -json | jq -r .ops_manager_ssh_private_key.value`
@@ -888,6 +895,9 @@ $ bosh -e azure log-in
 $ bosh -e azure vms
 $ bosh -e azure -d $DEPLOYMENT ssh $VMNAME/$GUID
 $ bosh -e azure -d $DEPLOYMENT cloud-check
+$ bosh -e azure -d $DEPLOYMENT stop --hard
+$ find /var/tempest/workspaces/default/deployments -name cf-*.yml
+$ bosh -e azure -d $DEPLOYMENT start
 ```
 
 ### Kernel Panic
